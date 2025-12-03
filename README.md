@@ -85,18 +85,10 @@
    在终端/CMD 输入 `ipconfig` 查看 IPv4 地址（例如 `192.168.1.5`）。
 
 2. **修改配置**：
-   打开 `app/src/main/java/com/example/chatsystem/ChatActivity.java`，找到 `getServerIp()` 方法：
+   打开 `app/src/main/java/com/example/chatsystem/ChatActivity.java`，找到 'SERVER_IP' ：
 
 ```java
-private String getServerIp() {
-    if (isEmulator()) {
-        return "10.0.2.2"; // 模拟器专用回环地址 (无需修改)
-    } else {
-        // 👇👇👇 请将此处修改为你电脑的真实局域网 IP 👇👇👇
-        return "192.168.1.5"; 
-    }
-}
-```
+    private static final String SERVER_IP = "192.168.1.8"; 
 
 3. **运行 App**：
     连接手机或模拟器，点击 Android Studio 顶部的 Run 'app' 按钮。
