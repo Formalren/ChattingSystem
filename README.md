@@ -102,7 +102,7 @@ private String getServerIp() {
     连接手机或模拟器，点击 Android Studio 顶部的 Run 'app' 按钮。
 
 ## 项目结构 (Structure)
-
+```text
 ChatSystem
 ├── app (Android Client Module)
 │   ├── src/main/java/com/example/chatsystem
@@ -116,7 +116,7 @@ ChatSystem
 └── server (Java Library Module)
     └── src/main/java/com/example/chatsystem
         └── ChatServer.java         // [Core] Server Listener & Forwarding
-
+```
 
 ## ❓ 常见问题 (Troubleshooting)
 Q: 模拟器能发消息，但真机连不上？
