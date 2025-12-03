@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F2F2F2">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="局域网聊天室"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="#FFFFFF"
+        android:elevation="2dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/btn_emoji"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="☺"
+                android:textSize="20sp"
+                android:background="?android:attr/selectableItemBackground"/>
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请输入消息..."
+                android:background="@null"
+                android:padding="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:text="发送"
+                android:textSize="12sp"
+                android:backgroundTint="#007BFF"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/panel_emoji"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:numColumns="5"
+            android:visibility="gone"
+            android:padding="10dp"
+            android:background="#F0F0F0"/>
+    </LinearLayout>
+</LinearLayout>

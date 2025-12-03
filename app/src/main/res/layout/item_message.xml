@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#D0D0D0"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:text="12:00"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:visibility="visible"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/ic_launcher_background" />
+    <LinearLayout
+        android:id="@+id/layout_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="#CCCCCC"
+            android:gravity="center"
+            android:text="Ta"
+            android:textColor="#FFF"
+            android:layout_marginRight="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_left_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:text="你好"
+            android:textColor="#000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_right_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#95EC69"
+            android:padding="10dp"
+            android:text="你好"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_marginRight="5dp"/>
+
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="#007BFF"
+            android:gravity="center"
+            android:text="Me"
+            android:textColor="#FFF"/>
+    </LinearLayout>
+</LinearLayout>
