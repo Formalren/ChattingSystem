@@ -5,135 +5,125 @@
 ![Architecture](https://img.shields.io/badge/Architecture-C%2FS-blue.svg)
 ![Protocol](https://img.shields.io/badge/Protocol-TCP%20Socket-red.svg)
 
-基于 Java 原生 Socket (BIO) 和 Android 实现的简易局域网即时通讯系统。本项目涵盖了 Android 客户端 UI 开发、SQLite 数据库存储、服务端网络编程以及 JSON 通信协议设计。
+基于 **Java 原生 Socket (BIO)** 和 **Android** 实现的简易局域网即时通讯系统。
 
-> 这是一个全栈开发的练手项目，实现了真机与模拟器、真机与真机在同一 WiFi 下的即时通信。
+本项目涵盖了 Android 客户端 UI 开发、SQLite 数据库本地存储、服务端多线程网络编程以及 JSON 通信协议设计。支持真机与模拟器、真机与真机在同一 WiFi 环境下的即时互通。
 
 ---
 
 ## ✨ 项目演示 (Demo)
 
-| 聊天界面 | 表情输入 | 服务端日志 |
+| 聊天主界面 | 表情输入面板 | 服务端日志 |
 | :---: | :---: | :---: |
-| <img src="screenshot/chat_main.jpg" width="200"/> | <img src="screenshot/emoji_panel.jpg" width="200"/> | <img src="screenshot/server_log.png" width="200"/> |
-*(注：请将你的运行截图放入项目 screenshot 文件夹中)*
+| <img src="screenshot/chat_main.jpg" alt="Chat UI" width="240"/> | <img src="screenshot/emoji_panel.jpg" alt="Emoji" width="240"/> | <img src="screenshot/server_log.png" alt="Server Log" width="240"/> |
+
+> *注：请在项目根目录下创建 `screenshot` 文件夹并放入截图。*
 
 ---
 
 ## 🛠 功能特性 (Features)
 
-* **即时通讯**: 基于 TCP 长连接，实现低延迟的消息收发。
-* **多端互联**: 支持 Android 真机、模拟器与 PC 服务端互通。
-* **消息持久化**: 采用 SQLite 数据库存储聊天记录，重启应用不丢失数据。
-* **富文本支持**: 支持文本消息发送，内置简易 Emoji 表情面板。
-* **UI 交互**: 
-    * 使用 `RecyclerView` 展示消息列表。
-    * 区分“发送方”与“接收方”的气泡布局。
-    * 实时时间戳显示。
+- **即时通讯**：基于 TCP 长连接，实现低延迟的消息收发。
+- **多端互联**：支持 Android 真机、模拟器与 PC 服务端无缝互通。
+- **智能 IP 识别**：客户端自动判断运行环境（真机/模拟器），自动切换连接 IP (`10.0.2.2` 或 局域网 IP)。
+- **消息持久化**：采用 SQLite 数据库存储聊天记录，重启应用不丢失数据。
+- **UI 交互**：使用 `RecyclerView` 展示消息列表，区分气泡布局。
 
 ---
 
 ## 🏗 技术栈 (Tech Stack)
 
 ### Client (Android)
-* **开发语言**: Java
-* **UI 组件**: RecyclerView, Adapter, LinearLayout
-* **数据存储**: SQLite (SQLiteOpenHelper)
-* **网络通信**: `java.net.Socket`, `Thread` (子线程网络请求), `Handler` (UI 更新)
-* **数据格式**: JSON (`org.json`)
+- **Language**: Java
+- **UI**: RecyclerView, Adapter, LinearLayout, GridView
+- **Database**: SQLite (SQLiteOpenHelper)
+- **Network**: `java.net.Socket`, `Thread`, `Handler`
+- **Data**: JSON (`org.json`)
 
 ### Server (Java PC)
-* **核心架构**: Java SE (BIO 模型)
-* **并发处理**: `ExecutorService` (线程池处理多客户端连接)
-* **消息分发**: 维护 `ClientHandler` 列表实现消息广播
+- **Core**: Java SE (BIO Model)
+- **Concurrency**: `ExecutorService` (ThreadPool)
 
 ---
 
-## 📝 通信协议 (Protocol)
+## 🚀 快速开始 (Getting Started)
 
-系统使用 **JSON** 格式进行数据交互，具备良好的扩展性。
+只需简单三步，即可在本地运行本项目。
 
-**消息模型 (ChatMessage):**
+### 1. 环境准备 (Prerequisites)
 
-```json
-{
-  "sender": "User_171695",   // 发送者 ID
-  "content": "你好，这是一条测试消息！", // 消息内容
-  "time": "10:30",           // 发送时间
-  "type": 1                  // (本地字段) 1:发送, 0:接收
+在开始之前，请确保你的开发环境满足以下要求：
+
+- [x] **IDE**: Android Studio Ladybug 或更高版本
+- [x] **JDK**: Java Development Kit 1.8 +
+- [x] **设备**: 一部 Android 真机（已开启 USB 调试）或 Android 模拟器
+- [x] **网络**: ⚠️ **关键**：手机和电脑必须连接同一个 WiFi，或者电脑连接手机开启的热点。
+
+### 2. 启动服务端 (Start Server)
+
+服务端负责消息的中转，必须先于客户端启动。
+
+1. 在 Android Studio 中找到 `server` 模块。
+2. 打开 `src/main/java/com/example/chatsystem/ChatServer.java`。
+3. 点击 `main` 方法旁的运行按钮。
+
+**验证启动：**
+当控制台输出以下日志时，说明服务端已就绪：
+
+```text
+>>> 聊天服务器启动，端口: 8888
+>>> 新设备连接: /127.0.0.1 (示例)
+
+> **注意**：如果是首次运行，Windows 防火墙可能会弹出警告，请务必勾选 **“允许访问 (专用网络 & 公用网络)”**，否则手机无法连接。
+
+### 3. 配置与运行客户端 (Run Client)
+
+客户端配置了智能 IP 切换，但仍需手动填写一次电脑的真实 IP。
+
+1. **获取电脑 IP**：
+   在终端/CMD 输入 `ipconfig` 查看 IPv4 地址（例如 `192.168.1.5`）。
+
+2. **修改配置**：
+   打开 `app/src/main/java/com/example/chatsystem/ChatActivity.java`，找到 `getServerIp()` 方法：
+
+```java
+private String getServerIp() {
+    if (isEmulator()) {
+        return "10.0.2.2"; // 模拟器专用回环地址 (无需修改)
+    } else {
+        // 👇👇👇 请将此处修改为你电脑的真实局域网 IP 👇👇👇
+        return "192.168.1.5"; 
+    }
 }
+3. **运行 App**：
+    连接手机或模拟器，点击 Android Studio 顶部的 Run 'app' 按钮。
 
----
-
-🚀 快速开始 (Getting Started)
-1. 环境准备
-Android Studio Ladybug 或更高版本。
-
-JDK 1.8+。
-
-一部 Android 手机（需开启开发者模式）或 Android 模拟器。
-
-关键: 手机和电脑必须连接同一个 WiFi（或手机开热点给电脑连）。
-
-2. 启动服务端
-找到 server 模块下的 ChatServer.java。
-
-运行 main 方法。
-
-控制台看到 >>> 聊天服务器启动，端口: 8888 即表示成功。
-
-注意：如果 Windows 防火墙弹窗，请务必勾选“允许访问”。
-
-3. 配置与运行客户端
-打开 ChatActivity.java。
-
-找到 getServerIp() 方法，将 else 分支的 IP 修改为你电脑当前的 IPv4 地址：
-
-Java
-
-return "192.168.x.x"; // <--- 修改这里
-连接手机或启动模拟器，点击 Run 'app'。
-
-📂 项目结构 (Structure)
-Plaintext
+## 项目结构 (Structure)
 
 ChatSystem
-├── app (Android Client)
+├── app (Android Client Module)
 │   ├── src/main/java/com/example/chatsystem
-│   │   ├── ChatActivity.java       // 主界面交互逻辑、网络连接
-│   │   ├── ChatAdapter.java        // 消息列表适配器
-│   │   ├── ChatMessage.java        // 消息实体类
-│   │   └── DatabaseHelper.java     // 数据库操作类
+│   │   ├── ChatActivity.java       // [Core] UI Logic & Socket Connection
+│   │   ├── ChatAdapter.java        // [UI] Message List Adapter
+│   │   ├── ChatMessage.java        // [Model] Message Entity
+│   │   └── DatabaseHelper.java     // [DB] SQLite Operations
 │   └── src/main/res/layout
-│       ├── activity_chat.xml       // 聊天主布局
-│       └── item_message.xml        // 消息气泡布局
-└── server (Java Library)
+│       ├── activity_chat.xml       // Chat Main Layout
+│       └── item_message.xml        // Message Bubble Layout
+└── server (Java Library Module)
     └── src/main/java/com/example/chatsystem
-        └── ChatServer.java         // 服务端核心代码
-❓ 常见问题 (Troubleshooting)
-Q: 模拟器能发消息，真机连不上？
+        └── ChatServer.java         // [Core] Server Listener & Forwarding
 
-检查电脑防火墙是否拦截了 8888 端口。尝试关闭防火墙测试。
 
-确保真机和电脑在同一网段（推荐使用手机热点）。
+## ❓ 常见问题 (Troubleshooting)
+Q: 模拟器能发消息，但真机连不上？
 
-检查代码中 getServerIp() 的真机 IP 分支是否填对。
+A: 通常是防火墙问题。
+
+检查电脑防火墙是否拦截了 8888 端口。
+
+确保真机代码中 getServerIp() 的 else 分支填写的 IP 是电脑当前的局域网 IP。
 
 Q: App 启动后报错 Value must be ≥ 0？
 
-这是因为旧的数据库结构与新代码不匹配。请卸载手机上的 App，然后重新运行安装。
-
-Q: Gradle 构建一直转圈？
-
-请确保不要把 Server 和 App 放在同一个 Build 任务里。先独立运行 Server，再运行 App。
-
-🔮 后期优化思路 (Roadmap)
-[ ] 心跳机制: 增加 Heartbeat 包，实现断线自动重连。
-
-[ ] 用户系统: 增加登录注册、头像上传功能。
-
-[ ] 多媒体传输: 支持图片、语音发送 (需引入文件服务器)。
-
-[ ] 加密通信: 将 Socket 升级为 SSLSocket，保障局域网通信安全。
-
-[ ] NIO 升级: 服务端改用 Netty 框架，支持更高并发。
+A: 这是因为旧的数据库结构与新代码不匹配。请卸载旧版 App，重新运行安装。
