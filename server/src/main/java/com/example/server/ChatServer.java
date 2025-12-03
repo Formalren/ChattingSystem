@@ -9,7 +9,9 @@ public class ChatServer {
     // 线程安全的集合，存储所有客户端连接
     private static final Set<PrintWriter> clientWriters = ConcurrentHashMap.newKeySet();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception { // 注意加 throws Exception
+        // 【新增】强行把 System.out 的编码设为 UTF-8
+        System.setOut(new java.io.PrintStream(System.out, true, "UTF-8"));
         System.out.println(">>> 聊天服务器启动，端口: " + PORT);
         System.out.println(">>> 请确保手机和电脑在同一 WiFi 下，并查看电脑 IP 地址。");
 

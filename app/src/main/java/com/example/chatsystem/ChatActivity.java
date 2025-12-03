@@ -1,4 +1,4 @@
-package com.example.chatsystem; // 修改包名
+package com.example.chatsystem;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -17,6 +17,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.chatsystem.ChatMessage;
+import com.example.chatsystem.DatabaseHelper;
 
 import org.json.JSONObject;
 

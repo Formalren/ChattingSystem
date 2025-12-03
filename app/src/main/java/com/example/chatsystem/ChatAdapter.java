@@ -1,5 +1,6 @@
 package com.example.chatsystem;
 
+import com.example.chatsystem.R; // 确保 R 文件引用正确
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
